@@ -1,4 +1,5 @@
 import React, { createContext, useContext, useEffect, useMemo, useState } from 'react'
+import { toast } from 'sonner'
 
 export interface CartItem {
   id: string
@@ -42,6 +43,10 @@ function useCartState() {
         return prev.map((i) => (i.id === item.id ? { ...i, quantity: i.quantity + 1 } : i))
       }
       return [...prev, { ...item, quantity: 1 }]
+    })
+    toast.success(`${item.name} ajouté au panier !`, {
+      description: `${item.price.toFixed(2)}€`,
+      duration: 2500,
     })
     setIsOpen(true)
   }
