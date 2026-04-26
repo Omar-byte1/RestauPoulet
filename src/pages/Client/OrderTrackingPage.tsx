@@ -5,7 +5,7 @@ import { useAdminStore } from '../../hooks/useAdminStore';
 import { useDocumentTitle } from '../../hooks/useDocumentTitle';
 
 export default function OrderTrackingPage() {
-  useDocumentTitle('Suivi Commande — PouletChic');
+  useDocumentTitle('Suivi Commande — Miam Poulet');
   const [orderCode, setOrderCode] = useState('');
   const [searched, setSearched] = useState(false);
   

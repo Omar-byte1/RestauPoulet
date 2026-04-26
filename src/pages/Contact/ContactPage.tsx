@@ -21,7 +21,7 @@ const stagger: Variants = {
 };
 
 export function ContactPage() {
-  useDocumentTitle('Contactez-nous — PouletChic');
+  useDocumentTitle('Contactez-nous — Miam Poulet');
 
   const [form, setForm] = useState({ name: '', email: '', subject: 'Question générale', message: '' });
   const [errors, setErrors] = useState<Record<string, string>>({});
@@ -105,8 +105,8 @@ export function ContactPage() {
               </div>
               <div>
                 <h3 className="text-lg font-bold text-slate-900 mb-1">Email</h3>
-                <a href="mailto:contact@pouletchic.fr" className="text-slate-600 hover:text-orange-600 transition-colors font-medium">
-                  contact@pouletchic.fr
+                <a href="mailto:contact@miampoulet.fr" className="text-slate-600 hover:text-orange-600 transition-colors font-medium">
+                  contact@miampoulet.fr
                 </a>
               </div>
             </motion.div>
@@ -254,7 +254,7 @@ export function ContactPage() {
               className="mt-6 rounded-3xl overflow-hidden border border-slate-200 shadow-sm"
             >
               <iframe
-                title="PouletChic sur la carte"
+                title="Miam Poulet sur la carte"
                 src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2624.9915668890726!2d2.376!3d48.857!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zNDjCsDUxJzI1LjIiTiAywrAyMic1My42IkU!5e0!3m2!1sfr!2sfr!4v1700000000000"
                 width="100%"
                 height="260"

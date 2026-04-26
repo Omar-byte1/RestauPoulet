@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { ShoppingCart, Menu as MenuIcon, X, Flame } from 'lucide-react';
+import { ShoppingCart, Menu as MenuIcon, X } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useCart } from '../../hooks/useCart';
+import logoImg from '../../assets/logo-miam-poulet.png';
 
 const Navbar = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = React.useState(false);
@@ -41,9 +42,13 @@ const Navbar = () => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between h-20 items-center">
           <Link to="/" className="flex items-center space-x-2 group">
-            <Flame className="w-8 h-8 text-orange-600 fill-orange-600 group-hover:scale-110 transition-transform duration-200" />
+            <img
+              src={logoImg}
+              alt="Miam Poulet Logo"
+              className="w-12 h-12 object-contain group-hover:scale-110 transition-transform duration-200 rounded-full"
+            />
             <span className="text-2xl font-black text-slate-900 tracking-tighter">
-              POULET<span className="text-orange-600">CHIC</span>
+              MIAM<span className="text-orange-600"> POULET</span>
             </span>
           </Link>
 

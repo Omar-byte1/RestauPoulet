@@ -7,7 +7,7 @@ import { useAdminStore } from '../../hooks/useAdminStore';
 import { useDocumentTitle } from '../../hooks/useDocumentTitle';
 
 export default function AdminDashboard() {
-  useDocumentTitle('Tableau de Bord — PouletChic');
+  useDocumentTitle('Tableau de Bord — Miam Poulet');
   const { logout } = useAuth();
   const navigate = useNavigate();
   const { feedbacks, orders, markFeedbackRead, updateOrderStatus, deleteOrder, deleteFeedback } = useAdminStore();

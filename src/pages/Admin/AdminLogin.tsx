@@ -7,7 +7,7 @@ import { useDocumentTitle } from '../../hooks/useDocumentTitle';
 import { toast } from 'sonner';
 
 export default function AdminLogin() {
-  useDocumentTitle('Connexion Admin — PouletChic');
+  useDocumentTitle('Connexion Admin — Miam Poulet');
   const [password, setPassword] = useState('');
   const [error, setError] = useState(false);
   const { login } = useAuth();

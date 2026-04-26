@@ -1,105 +1,103 @@
 import { useState } from 'react';
 import { motion, AnimatePresence, type Variants } from 'framer-motion';
-import { Flame, ShoppingCart, Star, Search } from 'lucide-react';
+import { ShoppingCart, Search, Drumstick, Beef, UtensilsCrossed, Sparkles, ChefHat } from 'lucide-react';
 import { useCart } from '../../hooks/useCart';
 import { useDocumentTitle } from '../../hooks/useDocumentTitle';
+import logoImg from '../../assets/logo-miam-poulet.png';
+import pommesImg from '../../assets/pommes-de-terre.png';
 
 const categories = [
-  { id: 'all', name: 'Tous les Plats' },
-  { id: 'braise', name: 'Poulet Braisé' },
-  { id: 'frit', name: 'Poulet Frit' },
-  { id: 'burger', name: 'Burgers & Wraps' },
-  { id: 'sides', name: 'Accompagnements' },
+  { id: 'all', name: 'Tout le Menu', icon: <UtensilsCrossed className="w-4 h-4" /> },
+  { id: 'poulet', name: 'Poulet', icon: <Drumstick className="w-4 h-4" /> },
+  { id: 'saucisse', name: 'Saucisses', icon: <Beef className="w-4 h-4" /> },
+  { id: 'accompagnement', name: 'Accompagnements', icon: <ChefHat className="w-4 h-4" /> },
+  { id: 'specialite', name: 'Spécialités', icon: <Sparkles className="w-4 h-4" /> },
 ];
 
 const menuItems = [
   {
-    id: 1,
-    name: 'Poulet Braisé Entier',
-    category: 'braise',
-    price: 18.50,
-    desc: 'Mariné aux herbes de Provence et épices douces.',
-    image: 'https://images.unsplash.com/photo-1600891964599-f61ba0e24092?auto=format&fit=crop&w=1200&q=80',
-    rating: 4.9,
-    spicy: false,
-    veggie: false,
+    id: 1, name: 'Poulet Entier', category: 'poulet', price: 7.50,
+    desc: 'Un poulet entier rôti à la broche, doré et croustillant.',
+    image: 'https://images.unsplash.com/photo-1598103442097-8b74394b95c6?auto=format&fit=crop&w=800&q=80',
+    popular: true,
   },
   {
-    id: 2,
-    name: 'Bucket Wings (12pcs)',
-    category: 'frit',
-    price: 15.90,
-    desc: 'Ailes de poulet marinées et frites façon Kentucky.',
-    image: 'https://images.unsplash.com/photo-1606756790138-261d2b21cd75?auto=format&fit=crop&w=1200&q=80',
-    rating: 4.8,
-    spicy: true,
-    veggie: false,
+    id: 2, name: 'Demi Poulet', category: 'poulet', price: 4.00,
+    desc: 'Un demi poulet rôti, parfait pour un repas individuel.',
+    image: 'https://images.unsplash.com/photo-1594221708779-94832f4320d1?auto=format&fit=crop&w=800&q=80',
+    popular: false,
   },
   {
-    id: 3,
-    name: 'Le Chic Burger',
-    category: 'burger',
-    price: 12.90,
-    desc: 'Filet de poulet croustillant, cheddar, sauce maison.',
-    image: 'https://images.unsplash.com/photo-1550547660-d9450f859349?auto=format&fit=crop&w=1200&q=80',
-    rating: 4.7,
-    spicy: false,
-    veggie: false,
+    id: 3, name: '1 Cuisse', category: 'poulet', price: 2.50,
+    desc: 'Cuisse de poulet rôtie, tendre et juteuse.',
+    image: 'https://images.unsplash.com/photo-1610057099431-d73a1c9d2f2f?auto=format&fit=crop&w=800&q=80',
+    popular: false,
   },
   {
-    id: 4,
-    name: 'Tenders Maison (6pcs)',
-    category: 'frit',
-    price: 9.50,
-    desc: 'Aiguillettes de poulet panées à la main.',
-    image: 'https://images.pexels.com/photos/2338407/pexels-photo-2338407.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
-    rating: 4.8,
-    spicy: false,
-    veggie: false,
+    id: 4, name: '5 Cuisses', category: 'poulet', price: 10.00,
+    desc: 'Pack de 5 cuisses de poulet rôties — idéal pour la famille.',
+    image: 'https://images.unsplash.com/photo-1610057099431-d73a1c9d2f2f?auto=format&fit=crop&w=800&q=80',
+    popular: true,
   },
   {
-    id: 5,
-    name: 'Frites Maison',
-    category: 'sides',
-    price: 4.50,
-    desc: 'Pommes de terre fraîches coupées chaque matin.',
-    image: 'https://images.pexels.com/photos/1583884/pexels-photo-1583884.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
-    rating: 4.6,
-    spicy: false,
-    veggie: true,
+    id: 5, name: '1 Pilon', category: 'poulet', price: 1.00,
+    desc: 'Pilon de poulet rôti, croustillant et savoureux.',
+    image: 'https://images.unsplash.com/photo-1527477396000-e27163b481c2?auto=format&fit=crop&w=800&q=80',
+    popular: false,
   },
   {
-    id: 6,
-    name: 'Salade César Poulet',
-    category: 'braise',
-    price: 13.50,
-    desc: 'Poulet braisé, croûtons, parmesan, sauce césar.',
-    image: 'https://images.pexels.com/photos/1213710/pexels-photo-1213710.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
-    rating: 4.7,
-    spicy: false,
-    veggie: false,
+    id: 6, name: '3 Pilons', category: 'poulet', price: 2.50,
+    desc: 'Lot de 3 pilons de poulet bien dorés.',
+    image: 'https://images.unsplash.com/photo-1527477396000-e27163b481c2?auto=format&fit=crop&w=800&q=80',
+    popular: false,
   },
   {
-    id: 7,
-    name: 'Wrap Poulet Épicé',
-    category: 'burger',
-    price: 10.90,
-    desc: 'Tortilla grillée, poulet pimenté, avocat, salade.',
-    image: 'https://images.unsplash.com/photo-1562967914-608f82629710?auto=format&fit=crop&w=1200&q=80',
-    rating: 4.8,
-    spicy: true,
-    veggie: false,
+    id: 7, name: '1 Saucisse', category: 'saucisse', price: 1.00,
+    desc: 'Saucisse grillée artisanale, bien assaisonnée.',
+    image: 'https://images.unsplash.com/photo-1555939594-58d7cb561ad1?auto=format&fit=crop&w=800&q=80',
+    popular: false,
   },
   {
-    id: 8,
-    name: 'Coleslaw Maison',
-    category: 'sides',
-    price: 3.90,
-    desc: 'Chou blanc et carotte en sauce crémeuse maison.',
-    image: 'https://images.pexels.com/photos/4058516/pexels-photo-4058516.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
-    rating: 4.5,
-    spicy: false,
-    veggie: true,
+    id: 8, name: '6 Saucisses', category: 'saucisse', price: 5.00,
+    desc: 'Pack de 6 saucisses grillées — parfait pour partager.',
+    image: 'https://images.unsplash.com/photo-1555939594-58d7cb561ad1?auto=format&fit=crop&w=800&q=80',
+    popular: true,
+  },
+  {
+    id: 9, name: 'Riz Blanc', category: 'accompagnement', price: 3.50,
+    desc: 'Riz blanc nature, léger et parfumé.',
+    image: 'https://images.unsplash.com/photo-1516684732162-798a0062be99?auto=format&fit=crop&w=800&q=80',
+    popular: false,
+  },
+  {
+    id: 10, name: 'Riz Thaï au Poulet', category: 'accompagnement', price: 3.50,
+    desc: 'Riz thaï sauté avec du poulet et des épices.',
+    image: 'https://images.unsplash.com/photo-1603133872878-684f208fb84b?auto=format&fit=crop&w=800&q=80',
+    popular: true,
+  },
+  {
+    id: 11, name: 'Pâtes au Poulet', category: 'accompagnement', price: 3.50,
+    desc: 'Pâtes fraîches accompagnées de morceaux de poulet.',
+    image: 'https://images.unsplash.com/photo-1621996346565-e3dbc646d9a9?auto=format&fit=crop&w=800&q=80',
+    popular: false,
+  },
+  {
+    id: 12, name: 'Pommes de Terre au Four', category: 'accompagnement', price: 3.50,
+    desc: 'Pommes de terre cuites au four, dorées et fondantes.',
+    image: pommesImg,
+    popular: false,
+  },
+  {
+    id: 13, name: 'Le Crousty', category: 'specialite', price: 8.50,
+    desc: 'Notre spécialité maison ! Poulet croustillant avec garniture généreuse.',
+    image: 'https://images.unsplash.com/photo-1626645738196-c2a7c87a8f58?auto=format&fit=crop&w=800&q=80',
+    popular: true,
+  },
+  {
+    id: 14, name: 'Supplément Sauce', category: 'accompagnement', price: 0.20,
+    desc: 'Sauce maison au choix pour accompagner votre repas.',
+    image: 'https://images.unsplash.com/photo-1472476443507-c7a5948772fc?auto=format&fit=crop&w=800&q=80',
+    popular: false,
   },
 ];
 
@@ -109,7 +107,7 @@ const fadeUp: Variants = {
 };
 
 export default function MenuPage() {
-  useDocumentTitle('Notre Menu — PouletChic');
+  useDocumentTitle('Notre Menu — Miam Poulet');
   const [activeCategory, setActiveCategory] = useState('all');
   const [search, setSearch] = useState('');
   const { addItem } = useCart();
@@ -132,12 +130,13 @@ export default function MenuPage() {
           transition={{ duration: 0.6 }}
           className="text-center mb-12"
         >
+          <img src={logoImg} alt="Miam Poulet" className="w-24 h-24 mx-auto mb-4 object-contain rounded-full shadow-lg" />
           <span className="inline-block py-1 px-3 rounded-full bg-orange-100 text-orange-600 text-xs font-bold uppercase tracking-widest mb-4">
-            Fait maison chaque jour
+            Ouvert 7/7
           </span>
           <h1 className="text-5xl font-black text-slate-900 mb-4">Notre Menu</h1>
           <p className="text-slate-600 max-w-2xl mx-auto leading-relaxed">
-            Découvrez nos spécialités préparées avec passion. Du poulet fermier, des épices authentiques et beaucoup d'amour.
+            Poulet rôti, saucisses grillées et accompagnements faits maison. Découvrez toutes nos spécialités !
           </p>
         </motion.div>
 
@@ -169,12 +168,12 @@ export default function MenuPage() {
             <button
               key={cat.id}
               onClick={() => setActiveCategory(cat.id)}
-              className={`relative px-6 py-3 rounded-full font-bold transition-all text-sm ${
-                activeCategory === cat.id
+              className={`relative px-6 py-3 rounded-full font-bold transition-all text-sm flex items-center gap-2 ${activeCategory === cat.id
                   ? 'bg-orange-600 text-white shadow-lg shadow-orange-200'
                   : 'bg-slate-100 text-slate-600 hover:bg-slate-200'
-              }`}
+                }`}
             >
+              {cat.icon}
               {cat.name}
             </button>
           ))}
@@ -183,13 +182,7 @@ export default function MenuPage() {
         {/* Empty state */}
         <AnimatePresence mode="wait">
           {filtered.length === 0 && (
-            <motion.div
-              key="empty"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              className="text-center py-20"
-            >
+            <motion.div key="empty" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="text-center py-20">
               <p className="text-4xl mb-4">🍗</p>
               <p className="text-xl font-bold text-slate-700">Aucun résultat trouvé</p>
               <p className="text-slate-400 mt-2">Essayez un autre mot-clé ou une autre catégorie.</p>
@@ -217,55 +210,46 @@ export default function MenuPage() {
                     className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
                     onError={(e) => {
                       e.currentTarget.src =
-                        'data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22800%22 height=%22450%22 viewBox=%220 0 800 450%22%3E%3Cdefs%3E%3ClinearGradient id=%22g%22 x1=%220%22 y1=%220%22 x2=%221%22 y2=%221%22%3E%3Cstop stop-color=%22%23fb923c%22/%3E%3Cstop offset=%221%22 stop-color=%22%230f172a%22/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width=%22800%22 height=%22450%22 fill=%22url(%23g)%22/%3E%3Ctext x=%2250%25%22 y=%2250%25%22 dominant-baseline=%22middle%22 text-anchor=%22middle%22 fill=%22white%22 font-size=%2232%22%3EImage indisponible%3C/text%3E%3C/svg%3E';
+                        'data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22800%22 height=%22450%22 viewBox=%220 0 800 450%22%3E%3Crect width=%22800%22 height=%22450%22 fill=%22%23fb923c%22/%3E%3Ctext x=%2250%25%22 y=%2250%25%22 dominant-baseline=%22middle%22 text-anchor=%22middle%22 fill=%22white%22 font-size=%2232%22%3EImage indisponible%3C/text%3E%3C/svg%3E';
                     }}
                   />
-                  {/* Gradient overlay on hover */}
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-                  <div className="absolute top-4 right-4 flex space-x-2">
-                    {item.spicy && (
-                      <div className="bg-red-500 text-white p-2 rounded-full shadow-lg" title="Piquant">
-                        <Flame className="w-4 h-4" />
-                      </div>
-                    )}
-                    {item.veggie && (
-                      <div className="bg-green-500 text-white px-2.5 py-1 rounded-full shadow-lg text-xs font-bold" title="Végétarien">
-                        VEG
-                      </div>
-                    )}
-                  </div>
+                  {item.popular && (
+                    <div className="absolute top-4 left-4 bg-orange-600 text-white px-3 py-1 rounded-full text-xs font-bold uppercase shadow-lg">
+                      ⭐ Populaire
+                    </div>
+                  )}
                 </div>
                 <div className="p-6">
                   <div className="flex justify-between items-start mb-2">
                     <h3 className="text-xl font-bold text-slate-900">{item.name}</h3>
-                    <span className="text-orange-600 font-black text-lg ml-2 shrink-0">{item.price.toFixed(2)}€</span>
+                    <span className="text-orange-600 font-black text-xl ml-2 shrink-0">{item.price.toFixed(2)}€</span>
                   </div>
                   <p className="text-slate-500 text-sm mb-5 leading-relaxed line-clamp-2">{item.desc}</p>
-                  <div className="flex items-center justify-between">
-                    <div className="flex items-center space-x-1">
-                      <Star className="w-4 h-4 text-yellow-400 fill-yellow-400" />
-                      <span className="text-xs font-bold text-slate-500">{item.rating}</span>
-                    </div>
-                    <button
-                      onClick={() =>
-                        addItem({
-                          id: String(item.id),
-                          name: item.name,
-                          price: item.price,
-                          quantity: 1,
-                          image: item.image,
-                        })
-                      }
-                      className="flex items-center space-x-2 bg-slate-900 text-white px-4 py-2.5 rounded-xl font-bold text-sm hover:bg-orange-600 transition-colors active:scale-95"
-                    >
-                      <ShoppingCart className="w-4 h-4" />
-                      <span>Ajouter</span>
-                    </button>
-                  </div>
+                  <button
+                    onClick={() =>
+                      addItem({ id: String(item.id), name: item.name, price: item.price, quantity: 1, image: item.image })
+                    }
+                    className="w-full flex items-center justify-center space-x-2 bg-slate-900 text-white px-4 py-3 rounded-xl font-bold text-sm hover:bg-orange-600 transition-colors active:scale-95"
+                  >
+                    <ShoppingCart className="w-4 h-4" />
+                    <span>Ajouter au panier</span>
+                  </button>
                 </div>
               </motion.div>
             ))}
           </AnimatePresence>
+        </motion.div>
+
+        {/* Info banner */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.5 }}
+          className="mt-16 bg-gradient-to-r from-orange-600 to-red-600 rounded-3xl p-8 md:p-12 text-white text-center"
+        >
+          <h3 className="text-2xl md:text-3xl font-black mb-3">📍 Supplément sauce : 0,20€</h3>
+          <p className="text-orange-100 text-lg">Sauce maison disponible à 0,65€ — Ouvert 7j/7 !</p>
         </motion.div>
       </div>
     </div>
