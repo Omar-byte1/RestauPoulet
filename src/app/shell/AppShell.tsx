@@ -5,6 +5,7 @@ import { AnimatePresence, motion } from 'framer-motion'
 import Footer from '../../components/layout/Footer'
 import Navbar from '../../components/layout/Navbar'
 import CartDrawer from '../../components/cart/CartDrawer'
+import FloatingWhatsApp from '../../components/layout/FloatingWhatsApp'
 
 export function AppShell() {
   const location = useLocation()
@@ -38,6 +39,7 @@ export function AppShell() {
           </motion.div>
         </AnimatePresence>
       </main>
+      <FloatingWhatsApp />
       <Footer />
     </div>
   )

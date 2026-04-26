@@ -3,6 +3,9 @@
   <head>
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="manifest" href="/manifest.json" />
+    <meta name="theme-color" content="#ea580c" />
+    <link rel="apple-touch-icon" href="/logo-192.png" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Miam Poulet | Le Meilleur Poulet Rôti</title>
     <script data-arena-recording="true">(function(){
@@ -264,6 +267,13 @@ loadRrweb();
   console.log('[element-picker] Loaded. Waiting for inspect-mode command (or press Alt+Shift+I).');
 })();
 </script>
+    <script>
+      if ('serviceWorker' in navigator) {
+        window.addEventListener('load', () => {
+          navigator.serviceWorker.register('/sw.js').catch(err => console.log('SW failed', err));
+        });
+      }
+    </script>
   </body>
 </html>
 
